@@ -1,1 +1,76 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tweaks Pro</title>
+<style>
+body{margin:0;background:#080d0a;color:white;font-family:Arial,sans-serif;padding:20px}
+header{color:#39ff70;text-align:center;font-size:32px;font-weight:bold;margin:20px}
+.card{background:#121d16;border:1px solid #245b35;border-radius:14px;padding:18px;margin:15px 0}
+input,select,button{box-sizing:border-box;width:100%;padding:13px;margin:8px 0;border-radius:8px;border:1px solid #39ff70;background:#101810;color:white;font-size:16px}
+button{background:#20c653;color:#061008;font-weight:bold}
+h2{color:#39ff70}
+small{color:#b6c7bb}
+</style>
+</head>
+<body>
+<header>🎮 TWEAKS PRO</header>
+<p style="text-align:center">YOUR GAMING OPTIMIZATION HUB</p>
+
+<div class="card">
+<h2>Personalize your setup</h2>
+<input id="psn" placeholder="Enter your PSN Online ID">
+<select id="console">
+<option>PS5</option>
+<option>PS4 Pro</option>
+<option>PS4</option>
+</select>
+<select id="game">
+<option>Fortnite</option>
+<option>Roblox</option>
+</select>
+<button onclick="getTips()">GET MY TWEAKS</button>
+<p id="tips">Enter your details to see recommendations.</p>
+</div>
+
+<div class="card">
+<h2>⚡ Internet Ping Test</h2>
+<p id="ping">Not tested yet</p>
+<button onclick="testPing()">TEST MY INTERNET</button>
+<small>This measures your browser's connection to a test server, not your PlayStation game ping.</small>
+</div>
+
+<div class="card">
+<h2>🚀 Performance Tips</h2>
+<p>• Use a wired connection when possible.</p>
+<p>• Close downloads while gaming.</p>
+<p>• Keep your console software updated.</p>
+<p>• Use a display mode supported by your TV.</p>
+<p>• Check the game's performance settings.</p>
+</div>
+
+<script>
+function getTips(){
+let name=document.getElementById('psn').value||'Gamer';
+let system=document.getElementById('console').value;
+let game=document.getElementById('game').value;
+document.getElementById('tips').innerText=
+'Welcome '+name+'! Setup: '+system+'. Game: '+game+'. Try a wired connection, close downloads, and check your in-game performance settings.';
+}
+async function testPing(){
+let output=document.getElementById('ping');
+output.innerText='Testing...';
+try{
+let start=performance.now();
+await fetch('https://www.cloudflare.com/cdn-cgi/trace?test='+Date.now(),{cache:'no-store',mode:'no-cors'});
+let ms=Math.round(performance.now()-start);
+output.innerText='Browser test: about '+ms+' ms';
+}catch(e){
+output.innerText='Test unavailable. Check your internet connection.';
+}
+}
+</script>
+</body>
+</html>
+
